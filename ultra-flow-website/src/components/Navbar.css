@@ -5,7 +5,7 @@
   position: relative;
   z-index: 110;
   width: 100%;
-  background: #ffffff;
+  background: #06111d;
   border-bottom: 1px solid #eeeeee;
 }
 
@@ -94,14 +94,14 @@
 }
 
 .topbar__item span {
-  color: #777777;
+  color: #9aabba;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
 
 .topbar__item a {
-  color: #101820;
+  color: #ffffff;
   font-family: 'Inter', sans-serif;
   font-size: 15px;
   font-weight: 600;
@@ -166,7 +166,7 @@
   align-items: center;
   gap: 7px;
   padding: 29px 0;
-  color: #161616;
+  color: #e5edf5;
   font-family: 'Sora', sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -212,7 +212,7 @@
   left: -18px;
   min-width: 260px;
   padding: 10px;
-  background: #ffffff;
+  background: #0b1c2b;
   border-top: 3px solid #d50000;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
   border-radius: 0 0 5px 5px;
@@ -242,7 +242,7 @@
   justify-content: space-between;
   gap: 12px;
   padding: 13px 12px;
-  color: #333333;
+  color: #c5d3df;
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 500;
@@ -258,7 +258,7 @@
 
 .nav__dd a:hover {
   color: #d50000;
-  background: #fff4f4;
+  background: rgba(0, 217, 245, 0.09);
   padding-left: 17px;
 }
 
@@ -275,9 +275,9 @@
   gap: 10px;
   min-width: 185px;
   padding: 18px 22px;
-  color: #ffffff;
-  background: #d50000;
-  border: 1px solid #d50000;
+  color: #06111d;
+  background: #00d9f5;
+  border: 1px solid #00d9f5;
   font-family: 'Sora', sans-serif;
   font-size: 13px;
   font-weight: 700;
@@ -287,8 +287,8 @@
 }
 
 .nav__cta:hover {
-  color: #d50000;
-  background: #ffffff;
+  color: #00d9f5;
+background: #06111d;
   transform: translateY(-2px);
 }
 
