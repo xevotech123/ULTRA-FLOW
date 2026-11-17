@@ -1,11 +1,13 @@
+
 import { useEffect, useState } from 'react'
+import { Mail, Phone, MapPin, ArrowUpRight, ChevronDown } from 'lucide-react'
 import './Navbar.css'
 
-const links = [
-  { label: 'Home', href: '#home' },
+const menus = [
+  { label: 'Home', href: '/' },
   {
-    label: 'Supply Of',
-    href: '#supply',
+    label: 'Supply Of Services',
+    href: '/services',
     children: [
       'Fire Fighting Equipment',
       'Foam & Suppression Systems',
@@ -15,7 +17,7 @@ const links = [
   },
   {
     label: 'Products',
-    href: '#products',
+    href: '/products',
     children: [
       'Fire Hoses',
       'Couplings & Adaptors',
@@ -26,130 +28,181 @@ const links = [
       'Foam Equipments',
     ],
   },
-  { label: 'Industries', href: '#industries' },
-  { label: 'Contact', href: '#contact' },
+  {
+    label: 'Industries',
+    href: '/industries',
+    children: [
+      'Oil & Gas',
+      'Manufacturing',
+      'Power & Energy',
+      'Infrastructure',
+    ],
+  },
+  {
+    label: 'Company',
+    href: '/about',
+    children: ['About Us'],
+  },
+  { label: 'Contact', href: '/contact' },
 ]
-
-const Arrow = () => (
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M5 12h14M13 6l6 6-6 6" />
-  </svg>
-)
-
-const Chevron = () => (
-  <svg className="nav__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-    <path d="M6 9l6 6 6-6" />
-  </svg>
-)
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [open, setOpen] = useState(false)
-  const [active, setActive] = useState('Home')
-  const [dd, setDd] = useState(null)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const [activeDropdown, setActiveDropdown] = useState(null)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
+    const handleScroll = () => setScrolled(window.scrollY > 30)
+
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : ''
+    document.body.style.overflow = mobileOpen ? 'hidden' : ''
+
     return () => {
       document.body.style.overflow = ''
     }
-  }, [open])
+  }, [mobileOpen])
 
-  const go = (label) => {
-    setActive(label)
-    setOpen(false)
-    setDd(null)
+  const closeMenu = () => {
+    setMobileOpen(false)
+    setActiveDropdown(null)
   }
 
   return (
-    <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
-      <div className="nav__inner">
-        <a href="#home" className="nav__brand" onClick={() => go('Home')} aria-label="Ultra Flow Engineering Services">
-          <svg className="nav__logo" viewBox="0 0 76 52" aria-hidden="true">
-            <defs>
-              <linearGradient id="ufg" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#5ff3ff" />
-                <stop offset="1" stopColor="#00b8d9" />
-              </linearGradient>
-            </defs>
-            <path d="M2 4h14v26c0 5 3 8 8 8s8-3 8-8V4h14v27c0 14-9 21-22 21S2 45 2 31z" fill="url(#ufg)" />
-            <path d="M44 4h30v10H58v8h14v10H58v20H44z" fill="url(#ufg)" />
-          </svg>
-          <span className="nav__word">
-            <strong>ULTRA FLOW</strong>
-            <small>ENGINEERING SERVICES</small>
-          </span>
-        </a>
-
-        <span className="nav__divider" aria-hidden="true" />
-
-        <nav className={`nav__menu ${open ? 'is-open' : ''}`} aria-label="Main">
-          <ul>
-            {links.map((l) => (
-              <li
-                key={l.label}
-                className={`nav__item ${l.children ? 'has-dd' : ''} ${dd === l.label ? 'dd-open' : ''}`}
-              >
-                <a
-                  href={l.href}
-                  className={active === l.label ? 'is-active' : ''}
-                  onClick={(e) => {
-                    if (l.children && window.innerWidth <= 960) {
-                      e.preventDefault()
-                      setDd(dd === l.label ? null : l.label)
-                    } else go(l.label)
-                  }}
-                  aria-haspopup={l.children ? 'true' : undefined}
-                  aria-expanded={l.children ? dd === l.label : undefined}
-                >
-                  {l.label}
-                  {l.children && <Chevron />}
-                </a>
-                {l.children && (
-                  <ul className="nav__dd">
-                    {l.children.map((c) => (
-                      <li key={c}>
-                        <a href={l.href} onClick={() => go(l.label)}>
-                          {c}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            ))}
-          </ul>
-
-          <a href="#contact" className="btn btn--cut nav__cta-mobile" onClick={() => go('Contact')}>
-            <span>Get In Touch</span>
+    <>
+      <div className="topbar">
+        <div className="topbar__inner">
+          <a href="mailto:ultraflowengineering@gmail.com">
+            <Mail size={15} />
+            <span>ultraflowengineering@gmail.com</span>
           </a>
-        </nav>
 
-        <a href="#contact" className="nav__cta" onClick={() => go('Contact')}>
-          <span className="btn btn--cut">
-            <span>Get In Touch</span>
-            <Arrow />
-          </span>
-        </a>
+          <a href="tel:+917798477102">
+            <Phone size={15} />
+            <span>+91 77984 77102</span>
+          </a>
 
-        <button
-          className={`nav__burger ${open ? 'is-open' : ''}`}
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-          aria-expanded={open}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+          <a
+            href="https://www.google.com/maps/search/?api=1&query=House+No+1618+Ganesh+Park+Kawade+Wasti+Wagholi+Pune"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <MapPin size={15} />
+            <span>Wagholi, Pune, Maharashtra</span>
+          </a>
+        </div>
       </div>
-    </header>
+
+      <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
+        <div className="nav__inner">
+
+          <a href="/" className="nav__brand" onClick={closeMenu}>
+            <svg className="nav__logo" viewBox="0 0 76 52">
+              <defs>
+                <linearGradient id="ufg" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stopColor="#5ff3ff" />
+                  <stop offset="1" stopColor="#00b8d9" />
+                </linearGradient>
+              </defs>
+              <path d="M2 4h14v26c0 5 3 8 8 8s8-3 8-8V4h14v27c0 14-9 21-22 21S2 45 2 31z" fill="url(#ufg)" />
+              <path d="M44 4h30v10H58v8h14v10H58v20H44z" fill="url(#ufg)" />
+            </svg>
+
+            <span className="nav__word">
+              <strong>ULTRA FLOW</strong>
+              <small>ENGINEERING SERVICES</small>
+            </span>
+          </a>
+
+          <nav className={`nav__menu ${mobileOpen ? 'is-open' : ''}`}>
+            <ul>
+              {menus.map((item) => (
+                <li
+                  key={item.label}
+                  className={`nav__item ${item.children ? 'has-dd' : ''} ${
+                    activeDropdown === item.label ? 'dd-open' : ''
+                  }`}
+                  onMouseEnter={() => {
+                    if (window.innerWidth > 960 && item.children) {
+                      setActiveDropdown(item.label)
+                    }
+                  }}
+                  onMouseLeave={() => {
+                    if (window.innerWidth > 960) {
+                      setActiveDropdown(null)
+                    }
+                  }}
+                >
+                  <a
+                    href={item.href}
+                    onClick={(e) => {
+                      if (item.children) {
+                        e.preventDefault()
+                        setActiveDropdown(
+                          activeDropdown === item.label ? null : item.label
+                        )
+                      } else {
+                        closeMenu()
+                      }
+                    }}
+                    aria-expanded={
+                      item.children ? activeDropdown === item.label : undefined
+                    }
+                  >
+                    {item.label}
+                    {item.children && <ChevronDown size={14} />}
+                  </a>
+
+                  {item.children && (
+                    <ul className="nav__dd">
+                      {item.children.map((child) => (
+                        <li key={child}>
+                          <a
+                            href={
+                              item.label === 'Company'
+                                ? '/about'
+                                : item.label === 'Supply Of Services'
+                                ? '/services'
+                                : item.label === 'Products'
+                                ? '/products'
+                                : '/industries'
+                            }
+                            onClick={closeMenu}
+                          >
+                            {child}
+                            <ArrowUpRight size={14} />
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <a href="/contact" className="nav__cta" onClick={closeMenu}>
+            Enquiry Now <ArrowUpRight size={17} />
+          </a>
+
+          <button
+            className={`nav__burger ${mobileOpen ? 'is-open' : ''}`}
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle navigation"
+            aria-expanded={mobileOpen}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+
+        </div>
+      </header>
+    </>
   )
 }
