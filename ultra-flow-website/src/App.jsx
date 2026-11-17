@@ -2,31 +2,36 @@
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import TrustStrip from './components/TrustStrip'
+import './App.css'
 
-const products = [
+const services = [
   {
     number: '01',
-    title: 'Industrial Piping Systems',
-    image: 'https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=900&q=85',
-    description: 'Industrial piping solutions designed for reliable flow, performance and demanding engineering environments.'
+    title: 'Fire Fighting Equipment',
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=900&q=85',
+    description: 'Reliable fire fighting equipment and safety solutions for industrial and commercial environments.',
+    link: '/services'
   },
   {
     number: '02',
-    title: 'Valves & Fittings',
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=900&q=85',
-    description: 'Quality valves and fittings for efficient flow control and dependable industrial operations.'
+    title: 'Foam & Suppression Systems',
+    image: 'https://images.unsplash.com/photo-1516937941344-00b4e0337589?w=900&q=85',
+    description: 'Advanced foam and fire suppression solutions designed to support industrial fire safety.',
+    link: '/services'
   },
   {
     number: '03',
-    title: 'Fire Protection Equipment',
-    image: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=900&q=85',
-    description: 'Fire protection equipment and solutions supporting industrial safety requirements.'
+    title: 'Sprinkler Systems',
+    image: 'https://images.unsplash.com/photo-1567789884554-0b844b597180?w=900&q=85',
+    description: 'Dependable sprinkler system solutions for effective fire protection and property safety.',
+    link: '/services'
   },
   {
     number: '04',
-    title: 'Process Equipment',
-    image: 'https://images.unsplash.com/photo-1567789884554-0b844b597180?w=900&q=85',
-    description: 'Industrial process equipment and engineering supplies for operational requirements.'
+    title: 'Pumps & Rescue Equipment',
+    image: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?w=900&q=85',
+    description: 'Industrial pumps and rescue equipment for demanding operational and emergency requirements.',
+    link: '/services'
   }
 ]
 
@@ -37,74 +42,83 @@ export default function App() {
       <Navbar />
 
       <main>
+
         <Hero />
 
         <TrustStrip />
 
-        {/* PRODUCTS SECTION */}
-        <section className="products-section" id="products">
+        {/* OUR SERVICES */}
+        <section className="products-section" id="services">
 
           <div className="section-heading">
+
             <div>
-              <p className="eyebrow">OUR PRODUCTS</p>
+              <p className="eyebrow">OUR SERVICES</p>
+
               <h2>
-                Comprehensive
+                Engineering
                 <br />
-                <span>Engineering Solutions</span>
+                <span>Safety Solutions</span>
               </h2>
             </div>
 
-            <p>
-              A wide range of high-quality industrial products
-              and engineering supplies to meet your requirements.
-            </p>
+            <div>
+              <p>
+                Comprehensive fire protection, safety and
+                engineering solutions designed to support
+                safer and more reliable industrial operations.
+              </p>
+
+              <a href="/services" className="hero-button">
+                Explore All Services →
+              </a>
+            </div>
+
           </div>
 
           <div className="product-grid">
-            {products.map((product) => (
-              <article className="product-card" key={product.number}>
+
+            {services.map((service) => (
+
+              <article className="product-card" key={service.number}>
 
                 <div className="product-image">
-                  <img src={product.image} alt={product.title} />
+                  <img src={service.image} alt={service.title} />
+
                   <span className="product-index">
-                    {product.number}
+                    {service.number}
                   </span>
                 </div>
 
                 <div className="product-content">
 
                   <div className="product-title-row">
-                    <h3>{product.title}</h3>
+                    <h3>{service.title}</h3>
                     <span className="product-arrow">↗</span>
                   </div>
 
                   <div className="product-preview">
-                    <p>{product.description}</p>
+                    <p>{service.description}</p>
+
                     <a
                       className="product-enquiry"
-                      href="mailto:ultraflowengineering@gmail.com"
+                      href={service.link}
                     >
-                      ENQUIRE NOW <span>→</span>
+                      EXPLORE SERVICE →
                     </a>
                   </div>
 
                 </div>
+
               </article>
+
             ))}
+
           </div>
+
         </section>
 
-        {/* INDUSTRIES SECTION */}
-        <section className="industries" id="industries">
-          <p className="eyebrow">INDUSTRIES WE SERVE</p>
-          <h2>
-            Engineering Solutions
-            <br />
-            For Industrial Excellence.
-          </h2>
-        </section>
-
-        {/* CONTACT BANNER */}
+        {/* CONTACT CTA */}
         <section className="bottom-cta" id="contact">
 
           <div>
@@ -128,11 +142,14 @@ export default function App() {
           </a>
 
         </section>
+
       </main>
 
-      {/* FOOTER */}
       <footer>
-        <p>© {new Date().getFullYear()} ULTRAFLOW ENGINEERING SERVICES</p>
+
+        <p>
+          © {new Date().getFullYear()} ULTRAFLOW ENGINEERING SERVICES
+        </p>
 
         <a href="mailto:ultraflowengineering@gmail.com">
           ultraflowengineering@gmail.com
@@ -141,6 +158,7 @@ export default function App() {
         <a href="tel:+917798477102">
           +91 77984 77102
         </a>
+
       </footer>
 
     </div>
