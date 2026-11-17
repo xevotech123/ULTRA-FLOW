@@ -1,0 +1,183 @@
+/* ============================================================
+   ULTRA FLOW - global styles
+   Headings: Space Grotesk | Body: Inter
+   ============================================================ */
+
+:root {
+  --bg: #030b17;
+  --bg-2: #071a33;
+  --panel: #061327;
+  --cyan: #00e5ff;
+  --cyan-soft: rgba(0, 229, 255, 0.35);
+  --blue: #2a7bff;
+  --text: #eaf6ff;
+  --muted: #9db4c9;
+
+  --font-head: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --nav-h: 82px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-head);
+  line-height: 1.1;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: min(1280px, 100% - 48px);
+  margin-inline: auto;
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+/* ---------- Eyebrow label ("ENGINEERING EXCELLENCE ———") ---------- */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+.eyebrow::after {
+  content: '';
+  height: 1px;
+  width: clamp(60px, 14vw, 170px);
+  background: linear-gradient(90deg, var(--cyan), transparent);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.85rem 1.7rem;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--cyan);
+  border: 1.5px solid var(--cyan);
+  border-radius: 10px;
+  background: rgba(0, 229, 255, 0.06);
+  box-shadow: 0 0 14px rgba(0, 229, 255, 0.28),
+    inset 0 0 14px rgba(0, 229, 255, 0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+.btn svg {
+  width: 1.1em;
+  height: 1.1em;
+  transition: transform 0.25s ease;
+}
+.btn:hover {
+  background: rgba(0, 229, 255, 0.16);
+  box-shadow: 0 0 26px rgba(0, 229, 255, 0.55),
+    inset 0 0 18px rgba(0, 229, 255, 0.22);
+  transform: translateY(-2px);
+}
+.btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* Cut-corner variant (navbar "Get In Touch") */
+.btn--cut {
+  position: relative;
+  padding: 0.72rem 1.5rem;
+  border: 0;
+  border-radius: 0;
+  background: var(--cyan);
+  box-shadow: none;
+  clip-path: polygon(
+    14px 0,
+    100% 0,
+    100% calc(100% - 14px),
+    calc(100% - 14px) 100%,
+    0 100%,
+    0 14px
+  );
+}
+.btn--cut::before {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  background: #04101f;
+  clip-path: inherit;
+  transition: background 0.25s ease;
+}
+.btn--cut > * {
+  position: relative;
+}
+.btn--cut:hover {
+  background: var(--cyan);
+  box-shadow: none;
+  transform: none;
+}
+.btn--cut:hover::before {
+  background: #0b3447;
+}
+
+/* ---------- Accessibility ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

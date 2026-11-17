@@ -1,0 +1,104 @@
+.trust {
+  position: relative;
+  background: linear-gradient(180deg, rgba(7, 26, 51, 0.95), rgba(4, 14, 29, 0.95));
+  border-block: 1px solid rgba(0, 229, 255, 0.3);
+  box-shadow: 0 0 30px rgba(0, 229, 255, 0.1), inset 0 0 40px rgba(0, 229, 255, 0.04);
+}
+
+.trust__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.trust__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.7rem 1rem;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: trustIn 0.7s ease forwards;
+  animation-delay: calc(0.7s + var(--i) * 0.12s);
+  transition: background 0.3s ease;
+}
+@keyframes trustIn {
+  to { opacity: 1; transform: none; }
+}
+
+.trust__item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  height: 46px;
+  width: 2px;
+  transform: translateY(-50%);
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  opacity: 0.8;
+}
+
+.trust__icon {
+  flex-shrink: 0;
+  width: 46px;
+  height: 46px;
+  color: var(--cyan);
+  filter: drop-shadow(0 0 7px rgba(0, 229, 255, 0.7));
+  transition: transform 0.35s ease, filter 0.35s ease;
+}
+.trust__icon svg {
+  width: 100%;
+  height: 100%;
+}
+.trust__item:hover .trust__icon {
+  transform: scale(1.12) rotate(-4deg);
+  filter: drop-shadow(0 0 14px rgba(0, 229, 255, 1));
+}
+.trust__item:hover {
+  background: rgba(0, 229, 255, 0.05);
+}
+
+.trust__text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+.trust__text strong {
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.02rem;
+}
+.trust__text small {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ============ Responsive ============ */
+@media (max-width: 960px) {
+  .trust__list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .trust__item:nth-child(2)::after {
+    display: none;
+  }
+  .trust__item:nth-child(-n + 2) {
+    border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+  }
+}
+@media (max-width: 520px) {
+  .trust__list {
+    grid-template-columns: 1fr;
+  }
+  .trust__item {
+    justify-content: flex-start;
+    padding-inline: 1.5rem;
+  }
+  .trust__item::after {
+    display: none;
+  }
+  .trust__item:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 229, 255, 0.15);
+  }
+}
