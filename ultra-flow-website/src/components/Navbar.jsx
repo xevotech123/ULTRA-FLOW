@@ -1,6 +1,8 @@
 
 import { useEffect, useState } from 'react'
-import { Mail, Phone, MapPin, ArrowUpRight, ChevronDown } from 'lucide-react'
+import {
+  Mail, Phone, MapPin, ArrowUpRight, ChevronDown
+} from 'lucide-react'
 import './Navbar.css'
 
 const menus = [
@@ -46,6 +48,27 @@ const menus = [
   { label: 'Contact', href: '/contact' },
 ]
 
+function Brand() {
+  return (
+    <a href="/" className="nav__brand">
+      <svg className="nav__logo" viewBox="0 0 76 52">
+        <defs>
+          <linearGradient id="ufg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#5ff3ff" />
+            <stop offset="1" stopColor="#00b8d9" />
+          </linearGradient>
+        </defs>
+        <path d="M2 4h14v26c0 5 3 8 8 8s8-3 8-8V4h14v27c0 14-9 21-22 21S2 45 2 31z" fill="url(#ufg)" />
+        <path d="M44 4h30v10H58v8h14v10H58v20H44z" fill="url(#ufg)" />
+      </svg>
+      <span className="nav__word">
+        <strong>ULTRA FLOW</strong>
+        <small>ENGINEERING SERVICES</small>
+      </span>
+    </a>
+  )
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -53,16 +76,13 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30)
-
     handleScroll()
     window.addEventListener('scroll', handleScroll, { passive: true })
-
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : ''
-
     return () => {
       document.body.style.overflow = ''
     }
@@ -77,48 +97,46 @@ export default function Navbar() {
     <>
       <div className="topbar">
         <div className="topbar__inner">
-          <a href="mailto:ultraflowengineering@gmail.com">
-            <Mail size={15} />
-            <span>ultraflowengineering@gmail.com</span>
-          </a>
+          <Brand />
 
-          <a href="tel:+917798477102">
-            <Phone size={15} />
-            <span>+91 77984 77102</span>
-          </a>
+          <div className="topbar__contact">
+            <div className="topbar__item">
+              <Phone />
+              <div>
+                <span>Call Us</span>
+                <a href="tel:+917798477102">+91 77984 77102</a>
+              </div>
+            </div>
 
-          <a
-            href="https://www.google.com/maps/search/?api=1&query=House+No+1618+Ganesh+Park+Kawade+Wasti+Wagholi+Pune"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <MapPin size={15} />
-            <span>Wagholi, Pune, Maharashtra</span>
-          </a>
+            <div className="topbar__item">
+              <Mail />
+              <div>
+                <span>Send Us Mail</span>
+                <a href="mailto:ultraflowengineering@gmail.com">
+                  ultraflowengineering@gmail.com
+                </a>
+              </div>
+            </div>
+
+            <div className="topbar__item">
+              <MapPin />
+              <div>
+                <span>Our Location</span>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=House+No+1618+Ganesh+Park+Kawade+Wasti+Wagholi+Pune"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Wagholi, Pune, Maharashtra
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
         <div className="nav__inner">
-
-          <a href="/" className="nav__brand" onClick={closeMenu}>
-            <svg className="nav__logo" viewBox="0 0 76 52">
-              <defs>
-                <linearGradient id="ufg" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stopColor="#5ff3ff" />
-                  <stop offset="1" stopColor="#00b8d9" />
-                </linearGradient>
-              </defs>
-              <path d="M2 4h14v26c0 5 3 8 8 8s8-3 8-8V4h14v27c0 14-9 21-22 21S2 45 2 31z" fill="url(#ufg)" />
-              <path d="M44 4h30v10H58v8h14v10H58v20H44z" fill="url(#ufg)" />
-            </svg>
-
-            <span className="nav__word">
-              <strong>ULTRA FLOW</strong>
-              <small>ENGINEERING SERVICES</small>
-            </span>
-          </a>
-
           <nav className={`nav__menu ${mobileOpen ? 'is-open' : ''}`}>
             <ul>
               {menus.map((item) => (
@@ -163,15 +181,7 @@ export default function Navbar() {
                       {item.children.map((child) => (
                         <li key={child}>
                           <a
-                            href={
-                              item.label === 'Company'
-                                ? '/about'
-                                : item.label === 'Supply Of Services'
-                                ? '/services'
-                                : item.label === 'Products'
-                                ? '/products'
-                                : '/industries'
-                            }
+                            href={item.href}
                             onClick={closeMenu}
                           >
                             {child}
@@ -200,7 +210,6 @@ export default function Navbar() {
             <span />
             <span />
           </button>
-
         </div>
       </header>
     </>
