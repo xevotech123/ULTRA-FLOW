@@ -1,7 +1,6 @@
 
 import Navbar from './components/Navbar'
-import Hero from './components/Hero'
-import TrustStrip from './components/TrustStrip'
+import Home from './pages/Home'
 import './App.css'
 
 const services = [
@@ -42,107 +41,7 @@ export default function App() {
       <Navbar />
 
       <main>
-
-        <Hero />
-
-        <TrustStrip />
-
-        {/* OUR SERVICES */}
-        <section className="products-section" id="services">
-
-          <div className="section-heading">
-
-            <div>
-              <p className="eyebrow">OUR SERVICES</p>
-
-              <h2>
-                Engineering
-                <br />
-                <span>Safety Solutions</span>
-              </h2>
-            </div>
-
-            <div>
-              <p>
-                Comprehensive fire protection, safety and
-                engineering solutions designed to support
-                safer and more reliable industrial operations.
-              </p>
-
-              <a href="/services" className="hero-button">
-                Explore All Services →
-              </a>
-            </div>
-
-          </div>
-
-          <div className="product-grid">
-
-            {services.map((service) => (
-
-              <article className="product-card" key={service.number}>
-
-                <div className="product-image">
-                  <img src={service.image} alt={service.title} />
-
-                  <span className="product-index">
-                    {service.number}
-                  </span>
-                </div>
-
-                <div className="product-content">
-
-                  <div className="product-title-row">
-                    <h3>{service.title}</h3>
-                    <span className="product-arrow">↗</span>
-                  </div>
-
-                  <div className="product-preview">
-                    <p>{service.description}</p>
-
-                    <a
-                      className="product-enquiry"
-                      href={service.link}
-                    >
-                      EXPLORE SERVICE →
-                    </a>
-                  </div>
-
-                </div>
-
-              </article>
-
-            ))}
-
-          </div>
-
-        </section>
-
-        {/* CONTACT CTA */}
-        <section className="bottom-cta" id="contact">
-
-          <div>
-            <p className="eyebrow">
-              HAVE AN ENGINEERING REQUIREMENT?
-            </p>
-
-            <h2>
-              Let's Build a Safer,
-              Stronger Future Together.
-            </h2>
-
-            <p>
-              Connect with Ultraflow Engineering Services
-              for your industrial supply requirements.
-            </p>
-          </div>
-
-          <a href="tel:+917798477102">
-            Contact Us <span>→</span>
-          </a>
-
-        </section>
-
+<Home />
       </main>
 
       <footer>
