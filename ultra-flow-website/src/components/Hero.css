@@ -14,7 +14,7 @@
   inset: 0;
   z-index: -3;
   background:
-    url('/hero.jpg') right center / cover no-repeat,
+    url('/hero.jpeg') right center / cover no-repeat,
     radial-gradient(ellipse at 75% 40%, #1b4a8a 0%, #0a2349 40%, var(--bg) 75%);
   animation: heroZoom 22s ease-in-out infinite alternate;
 }
